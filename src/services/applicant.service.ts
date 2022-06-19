@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
-import { ApplicantDto } from '../dto/applicant.dto';
+import { ApplicantDto } from 'dto/applicant.dto';
 
 @Injectable()
 export class ApplicantService {
     getApplicants() {
-        return 'Get Applicants';
+        return '';
     }
 
     getApplicant(applicantId: number) {
-        return `Get Applicant ${applicantId}`;
+        return `${applicantId}`;
     }
 
     createApplicant(applicantDto: ApplicantDto) {
@@ -16,6 +16,6 @@ export class ApplicantService {
     }
 
     deleteApplicant(applicantId: number) {
-        return `Delete applicant ${applicantId}`;
+        return `${applicantId}`;
     }
 }

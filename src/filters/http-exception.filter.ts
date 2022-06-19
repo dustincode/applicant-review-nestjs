@@ -16,6 +16,8 @@ export class HttpExceptionFilter implements ExceptionFilter {
         const { httpAdapter } = this.httpAdapterHost;
         const ctx = host.switchToHttp();
 
+        console.log(exception);
+
         const responseBody: ResponseErrorBody = {
             statusCode: HttpStatus.INTERNAL_SERVER_ERROR,
             timestamp: new Date().getTime(),
@@ -24,7 +26,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
         if (exception instanceof HttpException) {
             responseBody.statusCode = exception.getStatus();
-            responseBody.error = (exception.getResponse() as Object)?.['message'];
+            responseBody.error = (exception.getResponse() as any)?.['message'];
         } else {
             responseBody.message = 'Internal Server Error';
         }

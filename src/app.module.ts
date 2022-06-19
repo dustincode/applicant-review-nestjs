@@ -1,29 +1,18 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { DataSourceConfig } from 'configs/data-source.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ApplicantController } from './controllers/applicant.controller';
-import { ApplicantService } from './services/applicant.service';
-import { LoggerMiddleware } from './middlewares/logger.middleware';
-import { AuthMiddleware } from './middlewares/auth.middleware';
-import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { HttpExceptionFilter } from './filters/http-exception.filter';
+import { AuthMiddleware } from './middlewares/auth.middleware';
+import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { ValidationPipe } from './pipes/validation.pipe';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ApplicantService } from './services/applicant.service';
 
 @Module({
-    imports: [
-        TypeOrmModule.forRoot({
-            type: 'mysql',
-            host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: 'admin123',
-            database: 'applicant_service_nestjs',
-            entities: ['entities/*.ts'],
-            migrations: ['migrations/*.ts'],
-            autoLoadEntities: true,
-        }),
-    ],
+    imports: [TypeOrmModule.forRoot(DataSourceConfig)],
     controllers: [AppController, ApplicantController],
     providers: [
         {

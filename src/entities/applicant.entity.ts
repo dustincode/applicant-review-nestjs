@@ -1,8 +1,7 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Project } from './project.entity';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('applicant')
-export class Applicant {
+export class Applicant extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -27,11 +26,4 @@ export class Applicant {
         length: 100,
     })
     githubUser: string;
-
-    @ManyToOne(() => Project, (project) => project.applicant, {
-        cascade: true,
-        eager: true,
-        orphanedRowAction: 'delete',
-    })
-    projects: Project[];
 }

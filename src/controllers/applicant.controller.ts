@@ -9,8 +9,8 @@ import {
     Post,
     Res,
 } from '@nestjs/common';
-import { ApplicantDto } from '../dto/applicant.dto';
-import { ApplicantService } from '../services/applicant.service';
+import { ApplicantDto } from 'dto/applicant.dto';
+import { ApplicantService } from 'services/applicant.service';
 import { Response } from 'express';
 
 @Controller('/api/applicants')
